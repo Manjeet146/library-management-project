@@ -1,0 +1,746 @@
+# library-management-project
+
+from tkinter import *
+import mysql.connector as con
+root=Tk()
+root.title('MANJEET SINGH')
+root.geometry('250x200')
+root.minsize(320,300)
+root.configure(bg="#00ffff")
+m=0
+# connection object
+connection_object=con.connect(host="localhost",user="u0_a218",passwd='ravi',database='library')
+curobject=connection_object.cursor()
+
+# creating function to add new book
+def ANB():
+      cha()
+     
+      l=Label(f,text="Add new book",fg='red',padx=45,font="comicsansms 11 bold")
+      l.grid()
+
+      l1=Label(f1,text='Book id',bg='black',fg='white',padx=64)
+      l2=Label(f1,text='Book name',bg='black',fg='white',padx=54)
+      l3=Label(f1,text='Author name',bg='black',fg='white',padx=49)
+      l4=Label(f1,text='Price',bg='black',fg='white',padx=70)
+      l5=Label(f1,text='Quantity',bg='black',fg='white',padx=60)
+      l1.grid(row=1,column=1)  
+      l2.grid(row=2,column=1)
+      l3.grid(row=3,column=1)
+      l4.grid(row=4,column=1)
+      l5.grid(row=5,column=1)
+      name=StringVar()
+      phone=StringVar()
+      address=StringVar()
+      addres=StringVar()
+      addre=StringVar()
+     
+      e1=Entry(f1,textvariable=name)
+      e2=Entry(f1,textvariable=phone)
+      e3=Entry(f1,textvariable=address)
+      e4=Entry(f1,textvariable=addres)
+      e5=Entry(f1,textvariable=addre)
+      e1.grid(row=1,column=2)
+      e2.grid(row=2,column=2)
+      e3.grid(row=3,column=2)
+      e4.grid(row=4,column=2)
+      e5.grid(row=5,column=2)
+        
+      def ravi():
+          curobject.execute('INSERT INTO book(book_name,book_id,author_name,price,quantity) value("{}",{},"{}",{},{})'.format(e2.get(),e1.get(),e3.get(),e4.get(),e5.get()))
+          connection_object.commit()
+          l1.grid_forget()
+          b1.grid_forget()
+          b2.grid_forget()
+          b3.grid_forget()
+          b4.grid_forget()
+          b5.grid_forget()
+          l.grid_forget()
+          l2.grid_forget()
+          l3.grid_forget()
+          l4.grid_forget()
+          l5.grid_forget()
+          e1.grid_forget()
+          e2.grid_forget()
+          e3.grid_forget()
+          e4.grid_forget()
+          e5.grid_forget()
+          ANB()
+      def raj():
+          l1.grid_forget()
+          b1.grid_forget()
+          b2.grid_forget()
+          b3.grid_forget()
+          l.grid_forget()
+          l2.grid_forget()
+          l3.grid_forget()
+          l4.grid_forget()
+          l5.grid_forget()
+          e1.grid_forget()
+          e2.grid_forget()
+          e3.grid_forget()
+          e4.grid_forget()
+          e5.grid_forget()
+          AB()
+      b1=Button(f1,text='submit',command=ravi)
+      b1.grid(row=7,column=1)
+      b2=Button(f1,text='back',command=raj)
+      b2.grid(row=7,column=2)
+
+
+
+# creating function to delete any book
+def DB():
+      cha()
+      l1=Label(f,text='Delete book',fg='red',font="comicsansms 11 bold")
+      l1.grid()
+      l=Label(f1,text='book id',padx=50,bg='black',fg='white')
+      l.grid(row=1,column=1)
+      name=StringVar()
+      e1=Entry(f1,textvariable=name)
+      e1.grid(row=1,column=2)
+    
+      def ravi():
+          curobject.execute('delete from book where book_id={}'.format(e1.get()))
+          connection_object.commit()
+          l1.grid_forget()
+          b1.grid_forget()
+          b2.grid_forget()
+          b5.grid_forget()
+          e1.grid_forget()
+          l.grid_forget()
+          l1.grid_forget()
+          DB()
+      def raj():
+          l1.grid_forget()
+          b1.grid_forget()
+          b2.grid_forget()
+          b5.grid_forget()
+          e1.grid_forget()
+          l.grid_forget()
+          l1.grid_forget()
+          AB()
+      b1=Button(f1,text='submit',command=ravi)
+      b1.grid(row=7,column=1)
+      b2=Button(f1,text='back',command=raj)
+      b2.grid(row=7,column=2)  
+    
+
+#creating function to update any book quantity
+def UB():
+      cha()
+      l1=Label(f,text='Update book',fg='red',padx=45,font="comicsansms 11 bold")
+      l1.grid()
+      l=Label(f1,text='Book id',padx=34,bg='black',fg='white')
+      l.grid(row=1,column=1)
+      l2=Label(f1,text='Add new quantity',padx=6,bg='black',fg='white')
+      l2.grid(row=2,column=1)
+      name=StringVar()
+      qua=StringVar()
+      e1=Entry(f1,textvariable=name)
+      e1.grid(row=1,column=2)
+      e2=Entry(f1,textvariable=qua)
+      e2.grid(row=2,column=2)
+      def ravi():
+          curobject.execute('update book set quantity=quantity+{} where book_id={}'.format(e2.get(),e1.get()))
+          connection_object.commit()
+          l1.grid_forget()
+          b1.grid_forget()
+          b2.grid_forget()
+          e2.grid_forget()
+          b4.grid_forget()
+          b5.grid_forget()
+          e1.grid_forget()
+          l.grid_forget()
+          l2.grid_forget()
+          UB()
+      def raj():
+          l1.grid_forget()
+          b1.grid_forget()
+          b2.grid_forget()
+          e2.grid_forget()
+          b4.grid_forget()
+          b5.grid_forget()
+          e1.grid_forget()
+          l.grid_forget()
+          l2.grid_forget()
+          AB()
+      b1=Button(f1,text='submit',command=ravi)
+      b1.grid(row=7,column=1)
+      b2=Button(f1,text='back',command=raj)
+      b2.grid(row=7,column=2)  
+   
+# creating function to return list of books
+def LOB():
+      cha()
+      e2=Label(f,text='The list of book is given',fg='red',font="comicsansms 11 bold")
+      e2.grid()
+      curobject.execute("select book_name from book")
+      data=curobject.fetchall()
+      a=[]
+      for i in data:
+           e1=Label(f1,text=i[0],bg='green')
+           e1.grid()
+           a.append(e1)
+      def raj():
+          for i in a:
+              i.grid_forget()
+          e2.grid_forget()
+          b2.grid_forget()
+          AB()
+     
+      b2=Button(root,text='back',command=raj)
+      b2.grid(column=1)  
+
+
+# creating function to add new member
+def ANM():
+    chaa()
+    l=Label(f,text="Add new member",fg='red',font="comicsansms 11 bold")
+    l.grid()
+
+    l1=Label(f1,text='Name',padx=53,bg='black',fg='white')
+    l2=Label(f1,text='Phone no',padx=43,bg='black',fg='white')
+    l3=Label(f1,text='Address',padx=47,bg='black',fg='white')
+     
+    l1.grid(row=1,column=1)  
+    l2.grid(row=2,column=1)
+    l3.grid(row=3,column=1)
+     
+    name=StringVar()
+    phone=StringVar()
+    address=StringVar()
+   
+    e1=Entry(f1,textvariable=name)
+    e2=Entry(f1,textvariable=phone)
+    e3=Entry(f1,textvariable=address)
+     
+    e1.grid(row=1,column=2)
+    e2.grid(row=2,column=2)
+    e3.grid(row=3,column=2)
+     
+    def ravi():
+        curobject.execute('INSERT INTO member(mname,Phone_no,address) value("{}",{},"{}")'.format(e1.get(),e2.get(),e3.get()))
+        connection_object.commit()
+        l1.grid_forget()
+        b1.grid_forget()
+        b2.grid_forget()
+        l.grid_forget()
+        l2.grid_forget()
+        l3.grid_forget()
+        e1.grid_forget()
+        e2.grid_forget()
+        e3.grid_forget()
+        ANM()
+    def raj():
+        l1.grid_forget()
+        b1.grid_forget()
+        b2.grid_forget()
+        l.grid_forget()
+        l2.grid_forget()
+        l3.grid_forget()
+        e1.grid_forget()
+        e2.grid_forget()
+        e3.grid_forget()
+        AM()
+    b1=Button(f1,text='submit',command=ravi)
+    b1.grid(row=7,column=1)
+    b2=Button(f1,text='back',command=raj)
+    b2.grid(row=7,column=2)
+
+
+# creating function to return list of members
+def LOM():
+     chaa()
+     e=Label(f,text='The list of books is given',fg='red',font="comicsansms 11 bold")
+     e.grid()
+     curobject.execute("select mname,phone_no from member")
+     data=curobject.fetchall()
+     a=[]
+
+     j=1
+     e1=Label(f1,text='Name',bg='brown')
+     e2=Label(f1,text='Phone no',bg='brown')
+     e1.grid(row=0,column=1)
+     e2.grid(row=0,column=2)
+     a.append(e1)
+     a.append(e2)
+     for i in data:
+          e1=Label(f1,text=i[0],bg='green')
+          e2=Label(f1,text=i[1],bg='green')
+          e1.grid(row=j,column=1)
+          e2.grid(row=j,column=2)
+          a.append(e1)
+          a.append(e2)
+          j+=1
+     def raj():
+         for i in a:
+             i.grid_forget()
+         e.grid_forget()
+         e2.grid_forget()
+         b2.grid_forget()
+         AM()
+    
+     b2=Button(root,text='back',command=raj)
+     b2.grid(column=1)  
+   
+    
+    
+    
+
+              
+# creating function to issue book   
+def IB():
+     cha()
+     
+     l=Label(f,text="Issue book",fg='red',font="comicsansms 11 bold")
+     l.grid()
+
+    
+     l2=Label(f1,text='book name',bg='black',fg='white',padx=36)
+     l3=Label(f1,text='author name',bg='black',fg='white',padx=31)
+     l4=Label(f1,text='name',bg='black',fg='white',padx=50)
+     l5=Label(f1,text='phone no',bg='black',fg='white',padx=40)
+     l1=Label(f1,text='book id',bg='black',fg='white',padx=46)
+    
+     l4.grid(row=1,column=1)  
+     l5.grid(row=2,column=1)
+     l1.grid(row=3,column=1)
+     l2.grid(row=4,column=1)
+     l3.grid(row=5,column=1)
+    
+     nam=StringVar()
+     phon=StringVar()
+     adress=StringVar()
+     adres=StringVar()
+     adre=StringVar()
+     
+     e1=Entry(f1,textvariable=nam)
+     e2=Entry(f1,textvariable=phon)
+     e3=Entry(f1,textvariable=adress)
+     e4=Entry(f1,textvariable=adres)
+     e5=Entry(f1,textvariable=adre)
+    
+     e1.grid(row=1,column=2)
+     e2.grid(row=2,column=2)
+     e3.grid(row=3,column=2)
+     e4.grid(row=4,column=2)
+     e5.grid(row=5,column=2)
+     def ravi():
+         curobject.execute("insert into issue(name,phone_no,book_name,book_id,author_name,date,bookstatus) values('{}',{},'{}',{},'{}',curdate(),'issue')".format(e1.get(),e2.get(),e4.get(),e3.get(),e5.get()))
+         connection_object.commit()
+         l1.grid_forget()
+         b1.grid_forget()
+         b2.grid_forget()
+         b3.grid_forget()
+         l.grid_forget()
+         l2.grid_forget()
+         l3.grid_forget()
+         l4.grid_forget()
+         l5.grid_forget()
+         e1.grid_forget()
+         e2.grid_forget()
+         e3.grid_forget()
+         e4.grid_forget()
+         e5.grid_forget()
+         IB()
+     def raj():
+         l1.grid_forget()
+         b1.grid_forget()
+         b2.grid_forget()
+         b3.grid_forget()
+         l.grid_forget()
+         l2.grid_forget()
+         l3.grid_forget()
+         l4.grid_forget()
+         l5.grid_forget()
+         e1.grid_forget()
+         e2.grid_forget()
+         e3.grid_forget()
+         e4.grid_forget()
+         e5.grid_forget()
+         AI()
+     b1=Button(f1,text='submit',command=ravi)
+     b1.grid(row=7,column=1)
+     b2=Button(f1,text='back',command=raj)
+     b2.grid(row=7,column=2)
+    
+    
+
+
+# creating function to return book
+def RB():
+     cha()
+     
+     l=Label(f,text="Return book",fg='red',font="comicsansms 11 bold")
+     l.grid()
+
+    
+     l2=Label(f1,text='book name',bg='black',fg='white',padx=36)
+     l3=Label(f1,text='author name',bg='black',fg='white',padx=31)
+     l4=Label(f1,text='name',bg='black',fg='white',padx=50)
+     l5=Label(f1,text='phone no',bg='black',fg='white',padx=40)
+     l1=Label(f1,text='book id',bg='black',fg='white',padx=46)
+    
+     l4.grid(row=1,column=1)  
+     l5.grid(row=2,column=1)
+     l1.grid(row=3,column=1)
+     l2.grid(row=4,column=1)
+     l3.grid(row=5,column=1)
+    
+     nam=StringVar()
+     phon=StringVar()
+     adress=StringVar()
+     adres=StringVar()
+     adre=StringVar()
+     
+     e1=Entry(f1,textvariable=nam)
+     e2=Entry(f1,textvariable=phon)
+     e3=Entry(f1,textvariable=adress)
+     e4=Entry(f1,textvariable=adres)
+     e5=Entry(f1,textvariable=adre)
+    
+     e1.grid(row=1,column=2)
+     e2.grid(row=2,column=2)
+     e3.grid(row=3,column=2)
+     e4.grid(row=4,column=2)
+     e5.grid(row=5,column=2)
+     def ravi():
+         curobject.execute('update issue set bookstatus="return" where name="{}" and phone_no={} and book_name="{}" and book_id={} and author_name="{}"'.format(e1.get(),e2.get(),e4.get(),e3.get(),e5.get()))
+         connection_object.commit()
+         l1.grid_forget()
+         b1.grid_forget()
+         b2.grid_forget()
+         b3.grid_forget()
+         l.grid_forget()
+         l2.grid_forget()
+         l3.grid_forget()
+         l4.grid_forget()
+         l5.grid_forget()
+         e1.grid_forget()
+         e2.grid_forget()
+         e3.grid_forget()
+         e4.grid_forget()
+         e5.grid_forget()
+         RB()
+     def raj():
+         l1.grid_forget()
+         b1.grid_forget()
+         b2.grid_forget()
+         b3.grid_forget()
+         l.grid_forget()
+         l2.grid_forget()
+         l3.grid_forget()
+         l4.grid_forget()
+         l5.grid_forget()
+         e1.grid_forget()
+         e2.grid_forget()
+         e3.grid_forget()
+         e4.grid_forget()
+         e5.grid_forget()
+         AI()
+     b1=Button(f1,text='submit',command=ravi)
+     b1.grid(row=7,column=1)
+     b2=Button(f1,text='back',command=raj)
+     b2.grid(row=7,column=2)
+    
+    
+
+# creating function to return fine
+def RF():
+     cha()
+     
+     l=Label(f,text="Return fine",fg='red',font="comicsansms 11 bold")
+     l.grid()
+
+    
+     l2=Label(f1,text='book name',bg='black',fg='white',padx=36)
+     l3=Label(f1,text='author name',bg='black',fg='white',padx=31)
+     l4=Label(f1,text='name',bg='black',fg='white',padx=50)
+     l5=Label(f1,text='phone no',bg='black',fg='white',padx=40)
+     l1=Label(f1,text='book id',bg='black',fg='white',padx=46)
+    
+     l4.grid(row=1,column=1)  
+     l5.grid(row=2,column=1)
+     l1.grid(row=3,column=1)
+     l2.grid(row=4,column=1)
+     l3.grid(row=5,column=1)
+    
+     nam=StringVar()
+     phon=StringVar()
+     adress=StringVar()
+     adres=StringVar()
+     adre=StringVar()
+     
+     e1=Entry(f1,textvariable=nam)
+     e2=Entry(f1,textvariable=phon)
+     e3=Entry(f1,textvariable=adress)
+     e4=Entry(f1,textvariable=adres)
+     e5=Entry(f1,textvariable=adre)
+    
+     e1.grid(row=1,column=2)
+     e2.grid(row=2,column=2)
+     e3.grid(row=3,column=2)
+     e4.grid(row=4,column=2)
+     e5.grid(row=5,column=2)
+     a=[]
+     def ravi():
+         curobject.execute('select price from book where book_id={}'.format(e3.get()))
+         p=curobject.fetchone()
+         i=p[0]
+         j7=Label(root,text='you fine is{}'.format(i))
+         j7.grid()
+         a.append(j7)
+         curobject.execute('update issue set bookstatus="pay fine" where name="{}" and phone_no={} and book_name="{}" and book_id={} and author_name="{}"'.format(e1.get(),e2.get(),e4.get(),e3.get(),e5.get()))
+         connection_object.commit()
+         for i in a:
+             i.grid_forget()
+         l1.grid_forget()
+         b1.grid_forget()
+         b2.grid_forget()
+         b3.grid_forget()
+         l.grid_forget()
+         l2.grid_forget()
+         l3.grid_forget()
+         l4.grid_forget()
+         l5.grid_forget()
+         e1.grid_forget()
+         e2.grid_forget()
+         e3.grid_forget()
+         e4.grid_forget()
+         e5.grid_forget()
+         RF()
+     def raj():
+         for i in a:
+             i.grid_forget()
+         l1.grid_forget()
+         b1.grid_forget()
+         b2.grid_forget()
+         b3.grid_forget()
+         l.grid_forget()
+         l2.grid_forget()
+         l3.grid_forget()
+         l4.grid_forget()
+         l5.grid_forget()
+         e1.grid_forget()
+         e2.grid_forget()
+         e3.grid_forget()
+         e4.grid_forget()
+         e5.grid_forget()
+        
+         AI()
+     b1=Button(f1,text='submit',command=ravi)
+     b1.grid(row=7,column=1)
+     b2=Button(f1,text='back',command=raj)
+     b2.grid(row=7,column=2)
+    
+    
+   
+
+# creating function to find a person who issue any specific book          
+def SFP():
+     cha()
+     
+     l=Label(f,text="Search for person",fg='red',font="comicsansms 11 bold")
+     l.grid()
+     l2=Label(f1,text='book id',fg='white',bg='black',padx=40)
+     l2.grid(row=1,column=1)
+     adre=StringVar()
+     
+     e1=Entry(f1,textvariable=adre)
+     e1.grid(row=1,column=2)
+     a=[]
+     
+     def ravi():
+         n=7
+         global l3
+         curobject.execute('select name, phone_no,bookstatus from issue where book_id={} '.format(e1.get()))
+         data=curobject.fetchall()
+         l3=Label(root,text='name\tphone no\tstatus',fg='purple')
+         l3.grid(row=6,column=1)
+         a.append(l3)
+         for i in data:
+             l1=Label(root,text='  {}\t{}\t{}'.format(i[0],i[1],i[2]))
+             l1.grid(row=n,column=1)
+             a.append(l1)
+             n+=1    
+         b1.grid_forget()
+        
+     def raj():
+         for i in a:
+             i.grid_forget()
+         l.grid_forget()
+         l1.grid_forget()
+         l2.grid_forget()
+         e1.grid_forget()
+         b1.grid_forget()
+         b2.grid_forget()
+         AI()
+     b1=Button(f1,text='submit',command=ravi)
+     b1.grid(row=7,column=1)
+     b2=Button(f1,text='back',command=raj)
+     b2.grid(row=7,column=2)    
+
+
+
+def AB():
+   global b1
+   global b2
+   global b3
+   global b4
+   global b5
+   global l1
+   ch()
+   def back():
+        l1.grid_forget()
+        b1.grid_forget()
+        b2.grid_forget()
+        b3.grid_forget()
+        b4.grid_forget()
+        b5.grid_forget()
+        top()
+   l1=Label(f,text='Action you want to perform',fg='red',font="comicsansms 11 bold")
+   l1.grid(row=1,column=2)
+
+   b1=Button(f1,text='Add new book',command=ANB,padx=50)
+   b2=Button(f1,text='Update book',command=UB,padx=54)
+   b3=Button(f1,text='Delete book',command=DB,padx=56)
+   b4=Button(f1,text='List of books',command=LOB,padx=54)
+   b5=Button(root,text='back',command=back,padx=57)
+   b1.grid(row=2,column=2)
+   b2.grid(row=3,column=2)
+   b3.grid(row=4,column=2)
+   b4.grid(row=5,column=2)
+   b5.grid(row=6,column=1)
+
+
+def AM():
+    global b1
+    global b2
+    global b3
+    global b4
+    global b5
+    global l1
+    ch()
+    def back():
+        l1.grid_forget()
+        b1.grid_forget()
+        b2.grid_forget()
+        b3.grid_forget()
+        top()
+       
+    l1=Label(f,text='Action you want to perform',fg='red',font="comicsansms 11 bold")
+    l1.grid(row=1,column=2)
+
+    b1=Button(f1,text='Add new Member',command=ANM,padx=52)
+    b2=Button(f1,text='List of Members',command=LOM,padx=57)
+    b3=Button(root,text='back',command=back,padx=50)
+
+
+    b1.grid(row=2,column=2)
+    b2.grid(row=5,column=2)
+    b3.grid(row=6,column=1)
+       
+def AI():
+   global b1
+   global b2
+   global b3
+   global b4
+   global b5
+   global l1
+   ch()
+   def back():
+        l1.grid_forget()
+        b1.grid_forget()
+        b2.grid_forget()
+        b3.grid_forget()
+        b4.grid_forget()
+        b5.grid_forget()
+        top()
+   l1=Label(f,text='Action you want to perform',fg='red',font="comicsansms 11 bold")
+   l1.grid(row=1,column=2)
+
+   b1=Button(f1,text='Issue book',command=IB,padx=59)
+   b2=Button(f1,text='Return book',command=RB,padx=54)
+   b3=Button(f1,text='Return fine',command=RF,padx=58)
+   b4=Button(f1,text='Search person',command=SFP,padx=50)
+   b5=Button(root,text='back',command=back,padx=50)
+   b1.grid(row=2,column=2)
+   b2.grid(row=3,column=2)
+   b3.grid(row=4,column=2)
+   b4.grid(row=5,column=2)
+   b5.grid(row=6,column=1)
+
+
+def top():
+    global b1
+    global b2
+    global b3
+    global l1
+    global exit
+   
+
+    l1=Label(f,text='Select from the below options',fg='red',font="comicsansms 11 bold")
+    l1.grid(row=1,column=2)
+
+    b1=Button(f1,text='About book',command=AB,padx=50)
+    b2=Button(f1,text='About member',command=AM,padx=41)
+    b3=Button(f1,text='About issue',command=AI,padx=51)
+
+
+    b1.grid(row=2,column=2)
+    b2.grid(row=3,column=2)
+    b3.grid(row=4,column=2)
+    exit=Button(root,text='exit',command=root.quit,padx=50)
+    exit.grid(row=5,column=1)
+   
+
+
+f1=Frame(root,borderwidth=6,bg='green')
+f1.grid(row=2,column=1)
+f=Frame(root,borderwidth=6,bg='grey')
+f.grid(row=1,column=1)
+def cha():
+    global l1
+    global b1
+    global b2
+    global b3
+    global b4
+    global b5
+    global l
+    global e1
+    l1.grid_forget()
+    b1.grid_forget()
+    b2.grid_forget()
+    b3.grid_forget()
+    b4.grid_forget()
+    b5.grid_forget()
+def chaa():     
+    global l1
+    global b1
+    global b2
+    global b3
+    global b4
+    global b5
+    global l
+    global e1
+    l1.grid_forget()
+    b1.grid_forget()
+    b2.grid_forget()
+    b3.grid_forget()
+def ch():
+    global b1
+    global b2
+    global b3
+    global b4
+    global b5
+    global l1
+    l1.grid_forget()
+    b1.grid_forget()
+    b2.grid_forget()
+    b3.grid_forget()
+    exit.grid_forget()     
+a=1
+if a==1:
+    top()
+root.mainloop()
